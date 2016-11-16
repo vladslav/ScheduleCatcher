@@ -82,7 +82,7 @@ scheduleList[12]["sync"] = "Timid"
 scheduleList[12]["ignoreFarm"] = false
 
 --Time 20:00 ~ 20:59
-scheduleList[20]["map"] = "Safari Area 2_A"
+scheduleList[20]["map"] = "Safari Area 2"
 scheduleList[20]["zone"] = {"grass"}
 scheduleList[20]["sync"] = "Bold"
 scheduleList[20]["ignoreFarm"] = true
