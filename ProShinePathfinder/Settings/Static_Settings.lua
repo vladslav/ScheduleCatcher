@@ -25,7 +25,7 @@ Settings = {
 
         DISCOVER   = true,  --discover items.
         HARVEST    = true,  -- harvest berries.
-        HEADBUTT   = false, -- headbutt trees.
+        HEADBUTT   = true, -- headbutt trees.
         DIG        = true,  -- dig digSpots.
 
         K_SUBWAY   = 15, -- Weight for using the subway path. Kanto
@@ -65,7 +65,7 @@ Settings = {
 -----------------------
 end
 
-local version = "2.2.0"
+local version = "2.3.0"
 local cpath = select(1, ...) or "" -- callee path
 local function rmlast(str) return str:sub(1, -2):match(".+[%./]") or "" end -- removes last dir / file from the callee path
 local cdpath = rmlast(cpath) -- callee dir path

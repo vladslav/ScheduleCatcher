@@ -95,7 +95,7 @@ end
 -- return true if destination is reached
 local function goal(targets)
     return function(current)
-        return Table.inTable(targets, current)
+        return Lib.inTable(targets, current)
     end
 end
 
@@ -417,11 +417,11 @@ local function onPathfinderDialogMessage(message)
     pfData.toMap = toMap
     pfData.abilitiesIndex = settings.abilitiesIndex
     dialogSolver.solveDialog(message, pfData)
-	if stringContains(message, "What's up? Do you want to go back to   ") then resetPath() end
+    if stringContains(message, "What's up? Do you want to go back to   ") then resetPath() end
 end
 
 local function onPathfinderSystemMessage(message)
-	if stringContains(message, "Your Safari Time is over!") then resetPath() end
+    if stringContains(message, "Your Safari Time is over!") then resetPath() end
 end
 
 -- load map and settings

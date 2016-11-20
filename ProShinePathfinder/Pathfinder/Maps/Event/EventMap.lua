@@ -3,12 +3,7 @@ local function nTimes(n, f, x) for i = 0, n - 1 do x = f(x) end return x end -- 
 local function rmlast(str) return str:sub(1, -2):match(".+[%./]") or "" end -- removes last dir / file from the callee path
 local cpppdpath = nTimes(4, rmlast, cpath) -- callee parent parent of parent dir path
 
-local _ss = require (cpppdpath .. "Settings/Static_Settings")
-
 return function()
-
-local ss = _ss()
-local K_SUBWAY = ss.K_SUBWAY
 
 local EventMap = {}
 

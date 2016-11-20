@@ -5,7 +5,6 @@ local cppdpath = nTimes(3, rmlast, cpath) -- callee parent of parent dir path
 
 local Maybe                 = require (cppdpath .. "Lib/Maybe")
 local Lib                   = require (cppdpath .. "Lib/Lib")
-local Table                 = require (cppdpath .. "Lib/Table")
 local npcExceptions         = require (cppdpath .. "Maps/MapExceptions/NpcExceptions")
 local elevators             = require (cppdpath .. "Maps/MapExceptions/Elevators")
 local digways               = require (cppdpath .. "Maps/MapExceptions/Digways")
@@ -135,9 +134,9 @@ local function solveDialog(message, pf)
     local n2 = pf.toMap
     if pf.exceptionExist(npcExceptions, n1, n2) then
         return solveNpc(message, n1, n2)
-    elseif Table.inTable(useDigway, message) and pf.exceptionExist(digways, n1, n2) and pf.isDigPathEnabled() then
+    elseif Lib.inTable(useDigway, message) and pf.exceptionExist(digways, n1, n2) and pf.isDigPathEnabled() then
         return solveDigway(n1, n2, pf.abilitiesIndex.dig)
-    elseif Table.inTable(useDive, message) then
+    elseif Lib.inTable(useDive, message) then
         return solveDive(pf.abilitiesIndex.dive)
     elseif solveOutlet(message, pf) then
         return

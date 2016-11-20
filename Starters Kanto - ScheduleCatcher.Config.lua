@@ -44,7 +44,7 @@ statusMoveIgnoreList = {}
 --###############################################################################################################
 --Pokemon Hunt List====================================================
 
-huntList = { "Squirtle", "Bulbasaur", "Chansey", "Snorlax", "Lapras", "Charmander", "Magmar" }
+huntList = { "Squirtle", "Bulbasaur", "Chansey", "Shinx","Snorlax", "Lapras", "Charmander", "Magmar" }
 
 
 --###############################################################################################################
