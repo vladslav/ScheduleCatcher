@@ -61,7 +61,7 @@ function weakMoveCatch()
 		local weakMove = usablePokemonIdWithMove["move"]
 		if weakMovePokeId == 0 then
 			return false
-		elseif weakMove == "False Swipe" and getOpponentHealthPercent() < 5 then
+		elseif weakMove == "False Swipe" and getOpponentHealthPercent() < 7 then
 			return false
 		elseif weakMove ~= "False Swipe" and getOpponentHealthPercent() < weakMonveOponentMinHpPercentToAtack then
 			return false

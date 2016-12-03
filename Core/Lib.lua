@@ -131,14 +131,14 @@ function getDistance(xa, ya, xb, yb)
     return math.sqrt((xDist ^ 2) + (yDist ^ 2))
 end
 
--- MOVE TO mapZone {"grass"} / {"water"} / {x1, y1, x2, y2}
+-- MOVE TO mapZone {"grass"} / {"water"} / {"cave"} / {x1, y1, x2, y2}
 function moveToMapZone(mapZone)
 	if mapZone[1] == "grass" then
 		return moveToGrass()
 	elseif mapZone[1] == "water" then
 		return moveToWater()
 	elseif mapZone[1] == "cave" then
-		return moveToRandom()
+		return moveToNormalGround()
 	elseif getTableLength(mapZone) == 4 then
 		return moveToRectangle(mapZone[1], mapZone[2], mapZone[3], mapZone[4])
 	else

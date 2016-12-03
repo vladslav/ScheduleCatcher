@@ -51,7 +51,7 @@ huntList = { "Snorlax", "Staryu", "Vanillite", "Charmander", "Magmar" }
 --Schedule Hunt Map and Synchronize Config ============================
 
 --Time: Number of hours
---Zone: {"grass"} / {"water"} / {x1, y1, x2, y2}
+--Zone: {"grass"} / {"water"} / {"cave"} / {x1, y1, x2, y2}
 --Sync: Nature name or "" to disabled
 --IgnoreFarm: Ignore "farmOn = true"
 
