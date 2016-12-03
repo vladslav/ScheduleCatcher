@@ -1,3 +1,5 @@
+return function()
+
 local npcExce = {}
 
 ----------------------
@@ -204,14 +206,25 @@ npcExce["Five Island Ferry"] = {
 }]]
 
 ----------------------
+---- Trainers Valley ----
+----------------------
+
+npcExce["Trainers Valley Station Floor 2"] = {
+    ["Saffron City Station Floor 2"] = {{14, 10}, "Saffron", "Where would you like to go?"},
+	["Goldenrod City Station Floor 2"] = {{14, 10}, "Goldenrod", "Where would you like to go?"}
+}
+
+----------------------
 ---- INTER REGION ----
 ----------------------
 
 npcExce["Goldenrod City Station Floor 2"] = {
-    ["Saffron City Station Floor 2"] = {{14, 10}, "Yes", "Are you sure you would like to board on the ride to Goldenrod City at this moment?"}
+    ["Saffron City Station Floor 2"] = {{14, 10}, {"Yes", "Saffron City"}, {"Are you sure you would like to board on the ride to Goldenrod City at this moment?", "Where do you want to go?"}},
+    ["Trainers Valley Station Floor 2"] = {{14, 10}, "Trainers Valley", "Where do you want to go?"}
 }
 npcExce["Saffron City Station Floor 2"] = {
-    ["Goldenrod City Station Floor 2"] = {{14, 10}, "Yes", "Are you sure you would like to travel to Goldenrod City"}
+    ["Goldenrod City Station Floor 2"] = {{14, 10}, {"Yes", "Goldenrod City"}, {"Are you sure you would like to travel to Goldenrod City", "Where do you want to go?"}},
+    ["Trainers Valley Station Floor 2"] = {{14, 10}, "Trainers Valley", "Where do you want to go?"}
 }
 npcExce["Olivine City"] = {
     ["Lilycove City Harbor"] = {{17, 47}, "Lilycove City", "Where do you want to go, mate?"},
@@ -245,3 +258,4 @@ npcExce["Vulcan Island shore"] = {
 --     [""] = {{}, , ""}
 -- }
 return npcExce
+end
