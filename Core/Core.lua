@@ -116,7 +116,7 @@ function onPathAction()
 end
 
 function onBattleAction()
-    if isWildBattle() and ( isOpponentShiny() or (catchUncaught and not isAlreadyCaught()) or toHunt[getOpponentName()] ) then
+    if isWildBattle() and ( isOpponentShiny() or getOpponentForm() > 0 or (catchUncaught and not isAlreadyCaught()) or toHunt[getOpponentName()] ) then
         if weakMoveCatchOn and not statusMoveCatchOn then
 			if not weakMoveCatch() then
 					return usePokeball()
@@ -164,12 +164,16 @@ end
 
 function onStart()
 	startime = os.time()
-	shinyCounter = 0
-	pokecenterCounter = 0
-	wildCounter = 0	
-	pokeballCounter = 0
 	startMoney = getMoney()
-	pokeFound = getTableValuesZero(huntList)
+	pokecenterCounter = 0
+	pokeballCounter = 0
+	wildEncounter = 0
+	shinyEncounter = 0
+	shinyCaught = 0
+	specialEncounter = 0
+	specialCaught = 0
+	pokeEncounter = getTableValuesZero(huntList)
+	pokeCaught = getTableValuesZero(huntList)
 	if autoEvolveOn then
 		enableAutoEvolve()
 	else
@@ -284,21 +288,36 @@ function onBattleMessage(wild)
 	else
 		runStuck = false
 	end
-	if stringContains(wild, "A Wild SHINY ") then
-		shinyCounter = shinyCounter + 1
-	elseif stringContains(wild, "You throw") then
-		pokeballCounter = pokeballCounter + 1
-	else
-		found = false
+	if stringContains(wild, "A Wild ") then
+		wildEncounter = wildEncounter + 1
+		if stringContains(wild, "A Wild SHINY ") then
+			shinyEncounter = shinyEncounter + 1
+		elseif getOpponentForm() > 0 then
+			specialEncounter = specialEncounter + 1
+		end
 		for _,value in pairs(huntList) do
-			if wild == "A Wild [FF9900]"..value.."[-] Attacks!" then
-				pokeFound[value] = pokeFound[value] + 1
-				found = true
+			if stringContains(wild, value) then
+				pokeEncounter[value] = pokeEncounter[value] + 1
 				break
 			end
 		end
-		if not found and stringContains(wild, "A Wild ") then
-			wildCounter = wildCounter + 1
+	elseif stringContains(wild, "You throw") then
+		pokeballCounter = pokeballCounter + 1
+	elseif stringContains(wild, "Success! You caught ") then
+		shinyX = true
+		for _,value in pairs(huntList) do
+			if stringContains(wild, value) then
+				pokeCaught[value] = pokeCaught[value] + 1
+				shinyX = false
+				break
+			end
+		end
+		if shinyX then
+			if getOpponentForm() > 0 then
+				specialCaught = specialCaught + 1
+			else
+				shinyCaught = shinyCaught + 1
+			end
 		end
 	end
 end
@@ -314,15 +333,17 @@ function onPause()
 	log("- Ultra Ball: "..tostring(getItemQuantity("Ultra Ball")))
 	log("-----------------------------------------------------------")
 	log("~~~~~~~~~~~~~~~~~~~~~ Hunted Pokemons ~~~~~~~~~~~~~~~~~~~~~")
-	for key,value in pairs(pokeFound) do
-		log("- "..key..": "..value)
+	for key,value in pairs(pokeEncounter) do
+		log("- "..key.." -> Encountered: "..value.." | Caught: "..pokeCaught[key])
 	end
 	log("-----------------------------------------------------------")
+	log("- Shinies -> Encountered: "..shinyEncounter.." - Caught: "..shinyCaught)
+	log("-----------------------------------------------------------")
+	log("- Alternate Forms -> Encountered: "..specialEncounter.." | Caught: "..specialCaught)
+	log("-----------------------------------------------------------")
+	log("- Pokemons Encountered: " .. wildEncounter)
+	log("-----------------------------------------------------------")
 	log("- Pokeball's used: " .. pokeballCounter)
-	log("-----------------------------------------------------------")
-	log("- Shinies Caught: " .. shinyCounter)
-	log("-----------------------------------------------------------")
-	log("- Pokemons encountered: " .. wildCounter)
 	log("-----------------------------------------------------------")
 	log("- Times in Pokecenter: " .. pokecenterCounter)
 	if farmOn then
@@ -337,15 +358,17 @@ function onStop()
 	log("----------------------- BOT STOPED ------------------------")
 	log("-----------------------------------------------------------")
 	log("~~~~~~~~~~~~~~~~~~~~~ Hunted Pokemons ~~~~~~~~~~~~~~~~~~~~~")
-	for key,value in pairs(pokeFound) do
-		log("- "..key..": "..value)
+	for key,value in pairs(pokeEncounter) do
+		log("- "..key.." -> Encountered: "..value.." | Caught: "..pokeCaught[key])
 	end
 	log("-----------------------------------------------------------")
+	log("- Shinies -> Encountered: "..shinyEncounter.." - Caught: "..shinyCaught)
+	log("-----------------------------------------------------------")
+	log("- Alternate Forms -> Encountered: "..specialEncounter.." | Caught: "..specialCaught)
+	log("-----------------------------------------------------------")
+	log("- Pokemons Encountered: " .. wildEncounter)
+	log("-----------------------------------------------------------")
 	log("- Pokeball's used: " .. pokeballCounter)
-	log("-----------------------------------------------------------")
-	log("- Shinies Caught: " .. shinyCounter)
-	log("-----------------------------------------------------------")
-	log("- Pokemons encountered: " .. wildCounter)
 	log("-----------------------------------------------------------")
 	log("- Times in Pokecenter: " .. pokecenterCounter)
 	if farmOn then
