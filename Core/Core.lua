@@ -116,7 +116,7 @@ function onPathAction()
 end
 
 function onBattleAction()
-    if isWildBattle() and ( isOpponentShiny() or getOpponentForm() > 0 or (catchUncaught and not isAlreadyCaught()) or toHunt[getOpponentName()] ) then
+    if isWildBattle() and ( isOpponentShiny() or getOpponentForm() ~= 0 or (catchUncaught and not isAlreadyCaught()) or toHunt[getOpponentName()] ) then
         if weakMoveCatchOn and not statusMoveCatchOn then
 			if not weakMoveCatch() then
 					return usePokeball()
@@ -292,7 +292,7 @@ function onBattleMessage(wild)
 		wildEncounter = wildEncounter + 1
 		if stringContains(wild, "A Wild SHINY ") then
 			shinyEncounter = shinyEncounter + 1
-		elseif getOpponentForm() > 0 then
+		elseif getOpponentForm() ~= 0 then
 			specialEncounter = specialEncounter + 1
 		end
 		for _,value in pairs(huntList) do
@@ -313,7 +313,7 @@ function onBattleMessage(wild)
 			end
 		end
 		if shinyX then
-			if getOpponentForm() > 0 then
+			if getOpponentForm() ~= 0 then
 				specialCaught = specialCaught + 1
 			else
 				shinyCaught = shinyCaught + 1
@@ -337,7 +337,7 @@ function onPause()
 		log("- "..key.." -> Encountered: "..value.." | Caught: "..pokeCaught[key])
 	end
 	log("-----------------------------------------------------------")
-	log("- Shinies -> Encountered: "..shinyEncounter.." - Caught: "..shinyCaught)
+	log("- Shinies -> Encountered: "..shinyEncounter.." | Caught: "..shinyCaught)
 	log("-----------------------------------------------------------")
 	log("- Alternate Forms -> Encountered: "..specialEncounter.." | Caught: "..specialCaught)
 	log("-----------------------------------------------------------")
@@ -362,7 +362,7 @@ function onStop()
 		log("- "..key.." -> Encountered: "..value.." | Caught: "..pokeCaught[key])
 	end
 	log("-----------------------------------------------------------")
-	log("- Shinies -> Encountered: "..shinyEncounter.." - Caught: "..shinyCaught)
+	log("- Shinies -> Encountered: "..shinyEncounter.." | Caught: "..shinyCaught)
 	log("-----------------------------------------------------------")
 	log("- Alternate Forms -> Encountered: "..specialEncounter.." | Caught: "..specialCaught)
 	log("-----------------------------------------------------------")
