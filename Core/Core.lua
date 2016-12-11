@@ -351,6 +351,9 @@ function onPause()
 		log("- Pokedollars earned: "..tostring(getMoney() - startMoney))
 	end
 	log("-----------------------------------------------------------")
+	endtime = os.time()
+	log("- Bot running time: " .. string.format("%02i",(os.difftime(endtime,startime)/3600)) .. ":" .. string.format("%02i",((os.difftime(endtime,startime)%3600)/60)))
+	log("-----------------------------------------------------------")
 end
 
 function onStop()
@@ -377,7 +380,6 @@ function onStop()
 	end
 	log("-----------------------------------------------------------")
 	endtime = os.time()
-	log(string.format("- Bot running time: %.2f", os.difftime(endtime,startime)/3600 ).. " hours")
-	log(string.format("- Bot running time: %.2f", os.difftime(endtime,startime)/60 ).. " minutes")
+	log("- Bot running time: " .. string.format("%02i",(os.difftime(endtime,startime)/3600)) .. ":" .. string.format("%02i",((os.difftime(endtime,startime)%3600)/60)))
 	log("-----------------------------------------------------------")
 end

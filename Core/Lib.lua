@@ -15,6 +15,30 @@ function swapVar(v1, v2)
 	v2 = tmp
 end
 
+function print_r ( t ) 
+    local print_r_cache={}
+    local function sub_print_r(t,indent)
+        if (print_r_cache[tostring(t)]) then
+            log(indent.."*"..tostring(t))
+        else
+            print_r_cache[tostring(t)]=true
+            if (type(t)=="table") then
+                for pos,val in pairs(t) do
+                    if (type(val)=="table") then
+                        log(indent.."["..pos.."] => "..tostring(t).." {")
+                        sub_print_r(val,indent..string.rep(" ",string.len(pos)+8))
+                        log(indent..string.rep(" ",string.len(pos)+6).."}")
+                    else
+                        log(indent.."["..pos.."] => "..tostring(val))
+                    end
+                end
+            else
+                log(indent..tostring(t))
+            end
+        end
+    end
+    sub_print_r(t,"  ")
+end
 
 -------------------------------------------------------------------------------------------------------------
 -- GAME FUNCTIONS
@@ -142,7 +166,7 @@ function moveToMapZone(mapZone)
 	elseif getTableLength(mapZone) == 4 then
 		return moveToRectangle(mapZone[1], mapZone[2], mapZone[3], mapZone[4])
 	else
-		fatal("Error: Zone Map Config - { {"..table.concat(zoneMap,"}, {").."} }")
+		fatal("Error: Zone Map Config - { {"..table.concat(mapZone,"}, {").."} }")
 	end
 end
 
